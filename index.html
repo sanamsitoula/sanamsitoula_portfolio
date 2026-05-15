@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sanam Sitoula — Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<!-- ── Loading splash ───────────────────────────────────────────────── -->
+<div id="loader">
+  <div class="l-spin"></div>
+  <div class="l-txt">Initializing cosmos</div>
+</div>
+
+<!-- ── Top bar (brand + meta) ───────────────────────────────────────── -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-dot"></span>
+    <span>Sanam Sitoula</span>
+  </div>
+  <div class="meta">v.2026 · Kathmandu / Remote</div>
+</header>
+
+<!-- ── Side nav dots ────────────────────────────────────────────────── -->
+<nav class="nav-dots" id="navDots">
+  <a href="#hero"        data-label="Intro"      data-section="0"></a>
+  <a href="#about"       data-label="About"      data-section="1"></a>
+  <a href="#skills"      data-label="Stack"      data-section="2"></a>
+  <a href="#projects"    data-label="Projects"   data-section="3"></a>
+  <a href="#experience"  data-label="Experience" data-section="4"></a>
+  <a href="#ai"          data-label="AI Focus"   data-section="5"></a>
+  <a href="#contact"     data-label="Contact"    data-section="6"></a>
+</nav>
+
+<!-- ── Three.js canvas (fixed, behind content) ──────────────────────── -->
+<canvas id="scene-canvas"></canvas>
+<div class="vignette"></div>
+
+<!-- ── Content sections ─────────────────────────────────────────────── -->
+<main class="sections">
+
+  <!-- Hero -->
+  <section class="section section--left" id="hero" data-screen-label="01 Hero">
+    <div class="panel">
+      <p class="eyebrow">Portfolio · 2026</p>
+      <h1 class="display">Building <em>thoughtful</em> products at the edge of AI &amp; software.</h1>
+      <p class="lede">
+        I'm <strong style="color:var(--text);font-weight:500">Sanam Sitoula</strong> — a Product Manager and Full-Stack Developer
+        exploring how AI can transform the way teams ship, learn, and decide.
+      </p>
+      <div class="cta-row">
+        <a href="#projects" class="btn">See projects <span class="btn-arrow">→</span></a>
+        <a href="#contact" class="btn btn--ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section section--right" id="about" data-screen-label="02 About">
+    <div class="panel">
+      <p class="section-index"><span class="idx">01</span> — About</p>
+      <h2 class="section-title">A <em>generalist</em> with a craftsman's eye.</h2>
+      <p class="lede">
+        I work across the seam between product strategy and shipped code — translating
+        ambiguity into specs, prototypes, and tested features. My happy place is the
+        first 30% of any new idea, where the right scaffolding decides whether it'll
+        scale or stall.
+      </p>
+      <div class="tags">
+        <span class="tag tag--accent">Product Management</span>
+        <span class="tag">Full-Stack Development</span>
+        <span class="tag">AI Integration</span>
+        <span class="tag">Digital Transformation</span>
+        <span class="tag">Systems Thinking</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills / Stack -->
+  <section class="section section--left" id="skills" data-screen-label="03 Skills">
+    <div class="panel panel--wide">
+      <p class="section-index"><span class="idx">02</span> — Stack &amp; tooling</p>
+      <h2 class="section-title">Tools I reach for <em>most days</em>.</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6-6-6M13 19h8"/></svg>
+          <h4>Frontend</h4>
+          <p>React · Next.js · TypeScript · Tailwind · Three.js</p>
+        </div>
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/></svg>
+          <h4>Backend &amp; data</h4>
+          <p>Node.js · Python · PostgreSQL · Redis · gRPC</p>
+        </div>
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6M4.2 4.2l4.3 4.3m7 7l4.3 4.3M1 12h6m10 0h6M4.2 19.8l4.3-4.3m7-7l4.3-4.3"/></svg>
+          <h4>AI / ML</h4>
+          <p>LLM apps · RAG · OpenAI · LangChain · Embeddings</p>
+        </div>
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg>
+          <h4>Infra &amp; ops</h4>
+          <p>Docker · AWS · Vercel · CI/CD · Observability</p>
+        </div>
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <h4>Product</h4>
+          <p>Discovery · Roadmapping · Specs · Analytics · A/B</p>
+        </div>
+        <div class="skill-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18zM2 2l7.6 7.6"/></svg>
+          <h4>Design</h4>
+          <p>Figma · Prototyping · Design systems · Motion</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section section--right" id="projects" data-screen-label="04 Projects">
+    <div class="panel panel--wide">
+      <p class="section-index"><span class="idx">03</span> — Selected work</p>
+      <h2 class="section-title">Projects I'm <em>proud</em> of.</h2>
+      <div class="projects-list">
+        <div class="project-card" data-interactive>
+          <div class="head">
+            <h3>Atlas — an AI ops copilot</h3>
+            <span class="year">2025</span>
+          </div>
+          <p>An internal copilot that reads runbooks and live telemetry to draft incident response steps. Cut median time-to-mitigate by 38% across two pilot teams.</p>
+          <div class="stack">Next.js · Python · OpenAI · LangChain · pgvector</div>
+        </div>
+        <div class="project-card" data-interactive>
+          <div class="head">
+            <h3>Loom — knowledge graph for SMEs</h3>
+            <span class="year">2024</span>
+          </div>
+          <p>A semantic-search workspace for small business teams. Ingests Slack, Drive, and email; surfaces "who knows X" answers in plain language.</p>
+          <div class="stack">React · Node · Postgres · Embeddings · RAG</div>
+        </div>
+        <div class="project-card" data-interactive>
+          <div class="head">
+            <h3>Pulse — digital transformation playbook</h3>
+            <span class="year">2024</span>
+          </div>
+          <p>Led a 9-month roadmap to modernize a mid-market firm's stack: replaced 4 legacy systems with a unified platform, $1.2M annual savings.</p>
+          <div class="stack">Discovery · Vendor selection · Change management</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section section--left" id="experience" data-screen-label="05 Experience">
+    <div class="panel">
+      <p class="section-index"><span class="idx">04</span> — Experience</p>
+      <h2 class="section-title">A path of <em>making things</em>.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <p class="meta">2024 — Present</p>
+          <h4>Product Manager · AI Platform</h4>
+          <p>Leading product for an applied-AI team building internal copilots and automation tooling.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="meta">2022 — 2024</p>
+          <h4>Full-Stack Developer · SaaS</h4>
+          <p>Built end-to-end features across a B2B analytics platform. Owned billing, onboarding, and a redesigned dashboard.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="meta">2020 — 2022</p>
+          <h4>Software Engineer · Startup</h4>
+          <p>Early hire on a small team. Shipped the first three customer-facing products from prototype to production.</p>
+        </div>
+        <div class="timeline-item">
+          <p class="meta">2018 — 2020</p>
+          <h4>BSc · Computer Science</h4>
+          <p>Foundations in distributed systems, data structures, and HCI. Built side projects in graphics &amp; web.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI focus -->
+  <section class="section section--right" id="ai" data-screen-label="06 AI Focus">
+    <div class="panel">
+      <p class="section-index"><span class="idx">05</span> — AI &amp; transformation</p>
+      <h2 class="section-title">Where I'm <em>placing bets</em>.</h2>
+      <p class="lede">
+        Most "AI transformation" projects fail not because the tech is wrong — but because
+        the workflow underneath it never changed. I focus on these three patterns.
+      </p>
+      <div class="ai-list">
+        <div class="ai-item">
+          <span class="ai-num">→ 01</span>
+          <div class="ai-body">
+            <h4>Embedded copilots, not separate chatbots</h4>
+            <p>Surface AI inside the tools people already use. Reduces context-switching and increases adoption 3–5×.</p>
+          </div>
+        </div>
+        <div class="ai-item">
+          <span class="ai-num">→ 02</span>
+          <div class="ai-body">
+            <h4>Evaluation as a first-class artifact</h4>
+            <p>Build the eval set before the feature. Without ground-truth, "is it working?" becomes a feeling, not a metric.</p>
+          </div>
+        </div>
+        <div class="ai-item">
+          <span class="ai-num">→ 03</span>
+          <div class="ai-body">
+            <h4>Workflows over models</h4>
+            <p>The 10× wins come from rethinking the process — what gets automated, escalated, or deleted entirely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section section--center" id="contact" data-screen-label="07 Contact">
+    <div class="panel" style="text-align:center">
+      <p class="eyebrow" style="justify-content:center">Let's talk</p>
+      <h2 class="section-title contact-title">
+        Got a hard problem<br/>worth <em>solving together</em>?
+      </h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto;text-align:center">
+        I'm open to product roles, advisory engagements, and weird AI side projects.
+        The best way to reach me is just to say hi.
+      </p>
+      <div class="contact-actions">
+        <a href="mailto:hello@example.com" class="btn">Say hello <span class="btn-arrow">→</span></a>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/sanam-sitoula-35438a122/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+          <a href="#" target="_blank" rel="noopener">GITHUB ↗</a>
+          <a href="#" target="_blank" rel="noopener">TWITTER ↗</a>
+          <a href="mailto:hello@example.com">EMAIL ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── Boot script: scene + scroll observer + nav highlighting ──────── -->
+<script type="module">
+  import { CosmicScene } from './scene.js';
+
+  const canvas = document.getElementById('scene-canvas');
+  const TWEAK_DEFAULTS = window.__TWEAK_DEFAULTS || { palette: 'nebula', density: 1, speed: 1 };
+
+  const scene = new CosmicScene(canvas, {
+    palette: TWEAK_DEFAULTS.palette,
+    density: TWEAK_DEFAULTS.density,
+  });
+  window.__cosmicScene = scene;
+
+  // Reveal loader after a beat (gives WebGL one frame)
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('gone');
+    }, 350);
+  });
+
+  // Section fade-in via IntersectionObserver (also drives active nav dot)
+  const sections = document.querySelectorAll('.section');
+  const navDots = document.querySelectorAll('.nav-dots a');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        e.target.querySelector('.panel')?.classList.add('fade-in');
+        const idx = [...sections].indexOf(e.target);
+        if (idx >= 0) navDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0, rootMargin: '-30% 0px -30% 0px' });
+  sections.forEach(s => io.observe(s));
+  // Safety: first section visible immediately
+  sections[0].classList.add('in-view');
+  navDots[0].classList.add('active');
+
+  // Smooth scroll for nav dot clicks
+  navDots.forEach(d => {
+    d.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(d.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+<!-- ── Tweaks panel ─────────────────────────────────────────────────── -->
+<div id="tweaks-root"></div>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "palette": "ember",
+    "density": 1,
+    "showBooks": true,
+    "showAvatar": true,
+    "showAsteroids": true,
+    "showHolos": true,
+    "showComets": true,
+    "showStreams": true
+  }/*EDITMODE-END*/;
+  window.__TWEAK_DEFAULTS = TWEAK_DEFAULTS;
+
+  function TweaksApp() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+    // Apply tweaks live as they change
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s) return;
+      s.setPalette(t.palette);
+    }, [t.palette]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s) return;
+      s.setDensity(t.density);
+    }, [t.density]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.books) return;
+      s.books.forEach(b => b.visible = t.showBooks);
+    }, [t.showBooks]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.avatar) return;
+      s.avatar.visible = t.showAvatar;
+    }, [t.showAvatar]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.extras?.asteroids) return;
+      s.extras.asteroids.group.visible = t.showAsteroids;
+    }, [t.showAsteroids]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.extras?.holos) return;
+      s.extras.holos.group.visible = t.showHolos;
+    }, [t.showHolos]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.extras?.comets) return;
+      s.extras.comets.group.visible = t.showComets;
+    }, [t.showComets]);
+
+    React.useEffect(() => {
+      const s = window.__cosmicScene;
+      if (!s || !s.extras?.streams) return;
+      s.extras.streams.group.visible = t.showStreams;
+    }, [t.showStreams]);
+
+    return (
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Scene" />
+        <TweakColor
+          label="Palette"
+          value={t.palette === 'nebula' ? ['#8b5cf6', '#ec4899', '#67e8f9'] :
+                 t.palette === 'ember'  ? ['#ef4444', '#f59e0b', '#fde047'] :
+                                          ['#10b981', '#06b6d4', '#a78bfa']}
+          options={[
+            ['#8b5cf6', '#ec4899', '#67e8f9'],
+            ['#ef4444', '#f59e0b', '#fde047'],
+            ['#10b981', '#06b6d4', '#a78bfa'],
+          ]}
+          onChange={(v) => {
+            const map = {
+              '#8b5cf6': 'nebula',
+              '#ef4444': 'ember',
+              '#10b981': 'aurora',
+            };
+            setTweak('palette', map[v[0]] || 'nebula');
+          }}
+        />
+        <TweakSlider
+          label="Star density"
+          value={t.density}
+          min={0.3} max={1.5} step={0.05}
+          onChange={(v) => setTweak('density', v)}
+        />
+        <TweakSection label="Visibility" />
+        <TweakToggle
+          label="Floating books"
+          value={t.showBooks}
+          onChange={(v) => setTweak('showBooks', v)}
+        />
+        <TweakToggle
+          label="Avatar"
+          value={t.showAvatar}
+          onChange={(v) => setTweak('showAvatar', v)}
+        />
+        <TweakToggle
+          label="Asteroid belt"
+          value={t.showAsteroids}
+          onChange={(v) => setTweak('showAsteroids', v)}
+        />
+        <TweakToggle
+          label="Terminal panels"
+          value={t.showHolos}
+          onChange={(v) => setTweak('showHolos', v)}
+        />
+        <TweakToggle
+          label="Comets"
+          value={t.showComets}
+          onChange={(v) => setTweak('showComets', v)}
+        />
+        <TweakToggle
+          label="Data streams"
+          value={t.showStreams}
+          onChange={(v) => setTweak('showStreams', v)}
+        />
+      </TweaksPanel>
+    );
+  }
+
+  // Wait for tweaks-panel.jsx to define its globals, then mount
+  const mount = () => {
+    if (typeof useTweaks === 'undefined' || typeof TweaksPanel === 'undefined') {
+      return setTimeout(mount, 50);
+    }
+    const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+    root.render(<TweaksApp />);
+  };
+  mount();
+</script>
+
+</body>
+</html>
