@@ -7,6 +7,18 @@ A static portfolio website built with HTML, CSS, and JavaScript featuring a live
 
 ---
 
+## Preview
+
+| Hero | About |
+|---|---|
+| ![Hero](screenshots/preview-hero.png) | ![About](screenshots/preview-about.png) |
+
+| Projects | Contact |
+|---|---|
+| ![Projects](screenshots/preview-projects.png) | ![Contact](screenshots/preview-contact.png) |
+
+---
+
 ## Live URLs
 
 | Platform | URL | Status |
@@ -140,6 +152,8 @@ cd d:\claude_project\sanamsitoula_portfolio
 python -m http.server 8000
 ```
 Open `http://127.0.0.1:8000`
+
+![Local hosting — hero section](screenshots/preview-hero.png)
 
 ### Run locally with Docker
 
