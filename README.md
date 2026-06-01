@@ -30,6 +30,14 @@ Open `index.html` in your browser, or run a local server for full static site be
 - `scene-extras.js` — additional scene functionality
 - `tweaks-panel.jsx` — controls panel for scene tweaking
 
+## Deploy to Cloudflare Pages
+This repository is configured for Cloudflare Pages deployment.
+
+To deploy from the project root, use:
+```powershell
+npx wrangler pages deploy .
+```
+
 ## Notes
 - This project is static and does not require npm or build tools.
 - Use a local server to avoid browser restrictions on JavaScript modules and file loading.
