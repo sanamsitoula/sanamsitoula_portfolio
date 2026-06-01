@@ -784,21 +784,80 @@ h2.section-title em {
   .contact-links a { font-size: 11px; }
 }
 
-/* ── Light panel sections (GitHub + Recommendations) ───────────────── */
+/* ── Light panel — all sections ─────────────────────────────────────── */
 .section-light .panel,
 .section-light .panel--wide {
-  background: rgba(255, 255, 255, 0.93);
+  background: #ffffff;
   border-radius: 20px;
-  padding: 32px 36px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  backdrop-filter: blur(0);
-  -webkit-backdrop-filter: blur(0);
+  padding: 36px 40px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.32);
 }
+
+/* Typography overrides */
+.section-light .eyebrow { color: #0ea5e9; }
+.section-light .eyebrow::before { background: #0ea5e9; }
+.section-light h1.display { color: #111827; }
+.section-light h1.display em {
+  background: linear-gradient(90deg, #0ea5e9, #7c3aed);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-light h2.section-title { color: #111827; }
+.section-light h2.section-title em { color: #0ea5e9; -webkit-text-fill-color: #0ea5e9; }
+.section-light .lede { color: #4b5563; }
 .section-light .section-index { color: #6b7280; }
 .section-light .section-index .idx { color: #0ea5e9; }
-.section-light h2.section-title { color: #111827; }
-.section-light h2.section-title em { color: #0ea5e9; font-family: 'Instrument Serif', serif; font-style: italic; }
-.section-light .lede { color: #4b5563; }
+.section-light strong { color: #111827 !important; }
+.section-light .scroll-hint { color: #9ca3af; }
+.section-light .scroll-hint .line { background: linear-gradient(to bottom, #0ea5e9, transparent); }
+
+/* Tags */
+.section-light .tag { color: #6b7280; border-color: #e5e7eb; background: #f9fafb; }
+.section-light .tag--accent { color: #0ea5e9; border-color: rgba(14,165,233,0.4); background: rgba(14,165,233,0.06); }
+
+/* Buttons */
+.section-light .btn { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+.section-light .btn:hover { box-shadow: 0 8px 28px rgba(14,165,233,0.35); }
+.section-light .btn--ghost { background: transparent; color: #0ea5e9; border-color: #0ea5e9; }
+.section-light .btn--ghost:hover { background: #0ea5e9; color: #fff; }
+
+/* Skill cards */
+.section-light .skill-card { background: #f8fafc; border-color: #e5e7eb; }
+.section-light .skill-card:hover { border-color: #0ea5e9; background: #f0f9ff; }
+.section-light .skill-card h4 { color: #111827; }
+.section-light .skill-card p { color: #6b7280; }
+.section-light .skill-card .icon { color: #0ea5e9; }
+
+/* Project cards */
+.section-light .project-card { background: #f8fafc; border-color: #e5e7eb; }
+.section-light .project-card::before { background: linear-gradient(135deg, transparent, rgba(14,165,233,0.06)); }
+.section-light .project-card:hover { border-color: #0ea5e9; transform: translateX(4px); }
+.section-light .project-card h3 { color: #111827; }
+.section-light .project-card p { color: #6b7280; }
+.section-light .project-card .year { color: #9ca3af; }
+.section-light .project-card .stack { color: #9ca3af; }
+
+/* Timeline */
+.section-light .timeline::before { background: linear-gradient(to bottom, #0ea5e9, transparent); }
+.section-light .timeline-item::before { background: #0ea5e9; box-shadow: 0 0 10px rgba(14,165,233,0.3); }
+.section-light .timeline-item .meta { color: #9ca3af; }
+.section-light .timeline-item h4 { color: #111827; }
+.section-light .timeline-item p { color: #6b7280; }
+
+/* AI items */
+.section-light .ai-item { border-left-color: rgba(124,58,237,0.25); background: rgba(124,58,237,0.04); }
+.section-light .ai-item:hover { border-left-color: #7c3aed; background: rgba(124,58,237,0.08); }
+.section-light .ai-item .ai-num { color: #7c3aed; }
+.section-light .ai-item .ai-body h4 { color: #111827; }
+.section-light .ai-item .ai-body p { color: #6b7280; }
+
+/* Contact */
+.section-light .contact-links a,
+.section-light .contact-links a:link,
+.section-light .contact-links a:visited { color: #6b7280 !important; text-decoration: none !important; }
+.section-light .contact-links a:hover { color: #0ea5e9 !important; border-bottom-color: #0ea5e9; }
+
+/* Inline link */
 .section-light .inline-link,
 .section-light .inline-link:link,
 .section-light .inline-link:visited { color: #0ea5e9 !important; border-bottom-color: rgba(14,165,233,0.4); }
