@@ -1,94 +1,135 @@
-# Sanam Sitoula Portfolio
+# Sanam Sitoula — Portfolio
 
-A static portfolio project built with HTML, CSS, and JavaScript.
+A static portfolio website built with HTML, CSS, and JavaScript featuring a 3D interactive scene.
 
-## Preview
-Open `index.html` in your browser, or run a local server for full static site behavior.
+**Live site:** [sanamsitoula.com.np](https://sanamsitoula.com.np)
+**Azure Container App:** [sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io](https://sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io)
 
-## Prerequisites
-- A modern web browser
-- Python 3 (for local server) or any static web server
+![Deploy](https://github.com/sanamsitoula/sanamsitoula_portfolio/actions/workflows/azure-deploy.yml/badge.svg)
 
-## Run locally
-1. Open a terminal in the project folder:
-   ```powershell
-   cd d:\claude_project\sanamsitoula_portfolio
-   ```
-2. Start a local server:
-   ```powershell
-   python -m http.server 8000
-   ```
-3. Open your browser and visit:
-   ```text
-   http://127.0.0.1:8000/
-   ```
+---
 
-## Project files
-- `index.html` — main site entry point
-- `styles.css` — styling for the site
-- `scene.js` — 3D scene and interactive behavior
-- `scene-extras.js` — additional scene functionality
-- `tweaks-panel.jsx` — controls panel for scene tweaking
+## Documentation
 
-## Deploy to Cloudflare Pages
-This repository is configured for Cloudflare Pages deployment.
+| Guide | Description |
+|---|---|
+| [DOCKER_AZURE_SETUP.md](DOCKER_AZURE_SETUP.md) | How to build with Docker, push to ACR, deploy to Azure Container Apps, and set up custom domain |
+| [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) | How to set up GitHub Actions CI/CD pipeline for automatic deployment to Azure on every push |
+| [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) | How to deploy to Cloudflare Pages (alternative static hosting) |
 
-To deploy from the project root, use:
+---
+
+## Project Structure
+
+### Files and folders
+
+| Path | Type | Description |
+|---|---|---|
+| `index.html` | Page | Main entry point of the portfolio site |
+| `styles.css` | Style | All CSS styling for the site |
+| `scene.js` | Script | 3D scene setup and interactive behavior (Three.js) |
+| `scene-extras.js` | Script | Additional scene helpers and effects |
+| `tweaks-panel.jsx` | Script | Development-only controls panel for tweaking the 3D scene |
+| `Dockerfile` | Config | Builds an nginx image that serves the static site |
+| `.dockerignore` | Config | Excludes unnecessary files from the Docker image |
+| `wrangler.toml` | Config | Cloudflare Pages deployment configuration |
+| `_headers` | Config | HTTP response headers for Cloudflare Pages |
+| `.gitignore` | Config | Files excluded from git tracking |
+| `Profile.pdf` | Asset | Downloadable CV/resume |
+| `Sanam Sitoula.pptx` | Asset | Portfolio presentation file |
+| `Sanam Sitoula_project manager.pdf` | Asset | Project manager CV variant |
+
+### Documentation files
+
+| Path | Description |
+|---|---|
+| `README.md` | This file — project overview, structure, and quick start |
+| `DOCKER_AZURE_SETUP.md` | Full Docker + Azure setup guide with all errors and solutions |
+| `CICD_AZURE_SETUP.md` | GitHub Actions CI/CD pipeline guide for Azure |
+| `CLOUDFLARE_SETUP.md` | Cloudflare Pages deployment guide |
+
+### GitHub Actions workflows
+
+| Path | Trigger | What it does |
+|---|---|---|
+| `.github/workflows/azure-deploy.yml` | Push to `master` | Builds Docker image, pushes to ACR, deploys to Azure Container Apps |
+| `.github/workflows/deploy.yml` | Push to `master` | Deploys to Cloudflare Pages (original workflow) |
+
+---
+
+## How We Are Building This Project
+
+This project has evolved across multiple tasks in the same repository:
+
+| Task | Status | Guide |
+|---|---|---|
+| Static portfolio site (HTML/CSS/JS) | ✅ Done | — |
+| Local Docker build and run | ✅ Done | [DOCKER_AZURE_SETUP.md §5](DOCKER_AZURE_SETUP.md) |
+| Push Docker image to Azure Container Registry | ✅ Done | [DOCKER_AZURE_SETUP.md §6](DOCKER_AZURE_SETUP.md) |
+| Deploy to Azure Container Apps | ✅ Done | [DOCKER_AZURE_SETUP.md §7](DOCKER_AZURE_SETUP.md) |
+| Custom domain (sanamsitoula.com.np) via Azure DNS | 🔄 In progress (DNS propagating) | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| GitHub Actions CI/CD pipeline → Azure | ✅ Done | [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) |
+| Cloudflare Pages deployment | ✅ Done | [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) |
+| HTTPS certificate for custom domain | 🔄 Pending DNS propagation | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+
+---
+
+## Quick Start
+
+### Run locally (no Docker)
+
 ```powershell
-npx wrangler pages deploy . --project-name=sanamsitoula-portfolio --branch=master
+cd d:\claude_project\sanamsitoula_portfolio
+python -m http.server 8000
 ```
+Open `http://127.0.0.1:8000`
 
-## Run with Docker locally
-1. Build the Docker image:
-   ```powershell
+### Run locally with Docker
+
+```powershell
 docker build -t sanamsitoula-portfolio:latest .
-```
-2. Run the container on port 8080:
-   ```powershell
 docker run --rm -p 8080:80 sanamsitoula-portfolio:latest
 ```
-3. Open your browser and visit:
-   ```text
-http://127.0.0.1:8080/
+Open `http://127.0.0.1:8080`
+
+### Deploy to Azure (manual)
+
+```powershell
+docker build -t sanamsitoula-portfolio:latest .
+docker tag sanamsitoula-portfolio:latest sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest
+az acr login --name sanamsitoulaacr
+docker push sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest
+az containerapp update --name sanam-portfolio-app --resource-group portofolio --image sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest
 ```
 
-## Publish to Azure Container Registry and Azure Container Apps
-### 1. Install and sign in
-```powershell
-az login
-```
+### Deploy to Azure (automatic via CI/CD)
 
-### 2. Create a resource group
 ```powershell
-az group create --name sanam-portfolio-rg --location eastus
+git add .
+git commit -m "your change description"
+git push
 ```
+GitHub Actions handles the rest automatically. Watch progress in the **Actions** tab on GitHub.
 
-### 3. Create Azure Container Registry (ACR)
-```powershell
-az acr create --resource-group sanam-portfolio-rg --name sanamsitoulaacr --sku Basic
-```
+---
 
-### 4. Build and push the Docker image to ACR
-```powershell
-az acr build --registry sanamsitoulaacr --image sanamsitoula-portfolio:latest .
-```
+## Azure Infrastructure
 
-### 5. Create an Azure Container Apps environment
-```powershell
-az containerapp env create --name sanam-portfolio-env --resource-group sanam-portfolio-rg --location eastus
-```
+| Resource | Name | Region |
+|---|---|---|
+| Resource Group | `portofolio` | Korea Central |
+| Container Registry | `sanamsitoulaacr` | Korea Central |
+| Container Apps Environment | `sanam-portfolio-env` | Korea Central |
+| Container App | `sanam-portfolio-app` | Korea Central |
+| DNS Zone | `sanamsitoula.com.np` | (Global) |
 
-### 6. Create the Azure Container App
-```powershell
-az containerapp create --name sanam-portfolio-app --resource-group sanam-portfolio-rg --environment sanam-portfolio-env --image sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest --target-port 80 --ingress 'external'
-```
+> **Subscription:** Azure for Students — uses `koreacentral` region due to policy restrictions on `eastus`.
 
-### 7. Get the public URL
-```powershell
-az containerapp show --name sanam-portfolio-app --resource-group sanam-portfolio-rg --query properties.configuration.ingress.fqdn --output tsv
-```
+---
 
 ## Notes
-- This project is static and does not require npm or build tools.
-- Use Docker locally when you want a consistent, production-like environment.
-- Use Azure Container Apps to host the site as a containerized static web app.
+
+- This is a static site — no backend, no database, no build step required
+- Docker image uses `nginx:stable-alpine` to serve the static files
+- Azure Container Apps auto-scales to zero when idle (free tier)
+- The CI/CD pipeline runs on every push to `master` — avoid pushing broken code directly
