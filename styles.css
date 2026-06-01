@@ -61,7 +61,10 @@ body {
 }
 .sections a, .sections button, .sections [data-interactive],
 .gh-scroll, .recs-scroll, .skills-grid, .projects-list, .timeline,
-.tags, .ai-list, .contact-actions, .contact-links, .topbar-nav {
+.tags, .ai-list, .contact-actions, .contact-links, .topbar-nav,
+.contact-form, .contact-form input, .contact-form textarea,
+.contact-form button, .contact-form label, .contact-cards,
+.contact-card, .form-group, .form-row {
   pointer-events: auto;
 }
 
@@ -792,11 +795,11 @@ h2.section-title em {
   /* Panels more transparent on mobile so 3D scene shows through */
   .section-light .panel,
   .section-light .panel--wide {
-    background: rgba(255, 255, 255, 0.88);
+    background: rgba(255, 255, 255, 0.75);
     padding: 24px 20px;
     border-radius: 16px;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   /* Contact cards single column on mobile */
@@ -872,12 +875,13 @@ h2.section-title em {
 /* ── Light panel — all sections ─────────────────────────────────────── */
 .section-light .panel,
 .section-light .panel--wide {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.68);
   border-radius: 20px;
   padding: 36px 40px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.28);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 
 /* Typography overrides */
