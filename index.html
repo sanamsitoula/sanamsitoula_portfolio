@@ -564,6 +564,13 @@
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
+  // Debug: confirm SDK loaded and config is set
+  console.log('[EmailJS] SDK loaded. Config:', {
+    publicKey: EMAILJS_PUBLIC_KEY,
+    serviceId: EMAILJS_SERVICE_ID,
+    templateId: EMAILJS_TEMPLATE_ID,
+  });
+
   document.getElementById('contact-form').addEventListener('submit', function (e) {
     e.preventDefault();
     const btn    = document.getElementById('submit-btn');
@@ -582,15 +589,22 @@
       to_email:    'sanam.ctaula@gmail.com',
     };
 
+    console.log('[EmailJS] Sending with params:', params);
+
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-      .then(() => {
+      .then((response) => {
+        console.log('[EmailJS] SUCCESS:', response.status, response.text);
         status.textContent = '✓ Message sent! I will get back to you soon.';
         status.className = 'form-status form-status--ok';
         document.getElementById('contact-form').reset();
       })
       .catch((err) => {
-        console.error('EmailJS error:', err);
-        status.textContent = '✗ Failed to send. Please email sanam.ctaula@gmail.com directly.';
+        console.error('[EmailJS] FULL ERROR OBJECT:', err);
+        console.error('[EmailJS] Status:', err.status);
+        console.error('[EmailJS] Text:', err.text);
+        console.error('[EmailJS] Message:', err.message);
+        const detail = err.text || err.message || JSON.stringify(err);
+        status.textContent = '✗ Error ' + (err.status || '') + ': ' + detail;
         status.className = 'form-status form-status--err';
       })
       .finally(() => {
