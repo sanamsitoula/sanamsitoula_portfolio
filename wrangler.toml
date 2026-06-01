@@ -1,5 +1,7 @@
 name = "sanamsitoula-portfolio"
 compatibility_date = "2024-01-01"
 
-# This is a static site — no worker code needed
-# Cloudflare Pages will serve files from root directory
+# Static site assets configuration for Cloudflare Pages
+[assets]
+directory = "."
+binding = "ASSETS"
