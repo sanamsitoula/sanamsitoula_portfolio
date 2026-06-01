@@ -1,76 +1,133 @@
 # Sanam Sitoula — Portfolio
 
-A static portfolio website built with HTML, CSS, and JavaScript featuring a 3D interactive scene.
+A static portfolio website built with HTML, CSS, and JavaScript featuring a live 3D interactive cosmic scene.
 
-**Live site:** [sanamsitoula.com.np](https://sanamsitoula.com.np)
-**Azure Container App:** [sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io](https://sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io)
+![Cloudflare Deploy](https://github.com/sanamsitoula/sanamsitoula_portfolio/actions/workflows/deploy.yml/badge.svg)
+![Azure Deploy](https://github.com/sanamsitoula/sanamsitoula_portfolio/actions/workflows/azure-deploy.yml/badge.svg)
 
-![Deploy](https://github.com/sanamsitoula/sanamsitoula_portfolio/actions/workflows/azure-deploy.yml/badge.svg)
+---
+
+## Live URLs
+
+| Platform | URL | Status |
+|---|---|---|
+| Cloudflare Pages | [sanamsitoula-portfolio.pages.dev](https://sanamsitoula-portfolio.pages.dev) | ✅ Live (auto-deploys) |
+| Azure Container App | [sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io](https://sanam-portfolio-app.bluestone-3038c682.koreacentral.azurecontainerapps.io) | ✅ Live (auto-deploys) |
+| Custom Domain | [sanamsitoula.com.np](https://sanamsitoula.com.np) | 🔄 DNS propagating |
 
 ---
 
 ## Documentation
 
-| Guide | Description |
+All setup guides are in this repository. Read them in order if setting up from scratch.
+
+| Guide | What it covers |
 |---|---|
-| [DOCKER_AZURE_SETUP.md](DOCKER_AZURE_SETUP.md) | How to build with Docker, push to ACR, deploy to Azure Container Apps, and set up custom domain |
-| [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) | How to set up GitHub Actions CI/CD pipeline for automatic deployment to Azure on every push |
-| [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) | How to deploy to Cloudflare Pages (alternative static hosting) |
+| [DOCKER_AZURE_SETUP.md](DOCKER_AZURE_SETUP.md) | Docker local build, Azure Container Registry, Azure Container Apps, custom domain DNS, all errors encountered |
+| [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) | Full CI/CD pipeline setup — GitHub Actions permissions, all 5 secrets, workflow files, troubleshooting, security |
+| [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) | Cloudflare Pages deployment (alternative to Azure for static hosting) |
 
 ---
 
-## Project Structure
+## Project Files
 
-### Files and folders
+### Source files
 
-| Path | Type | Description |
+| File | Type | Description |
 |---|---|---|
-| `index.html` | Page | Main entry point of the portfolio site |
-| `styles.css` | Style | All CSS styling for the site |
-| `scene.js` | Script | 3D scene setup and interactive behavior (Three.js) |
-| `scene-extras.js` | Script | Additional scene helpers and effects |
-| `tweaks-panel.jsx` | Script | Development-only controls panel for tweaking the 3D scene |
-| `Dockerfile` | Config | Builds an nginx image that serves the static site |
-| `.dockerignore` | Config | Excludes unnecessary files from the Docker image |
-| `wrangler.toml` | Config | Cloudflare Pages deployment configuration |
-| `_headers` | Config | HTTP response headers for Cloudflare Pages |
-| `.gitignore` | Config | Files excluded from git tracking |
-| `Profile.pdf` | Asset | Downloadable CV/resume |
-| `Sanam Sitoula.pptx` | Asset | Portfolio presentation file |
+| `index.html` | Page | Main entry point — all sections, layout, content |
+| `styles.css` | Style | All styling — topbar, hero, cards, white panels, responsive |
+| `scene.js` | Script | 3D cosmic scene built with Three.js |
+| `scene-extras.js` | Script | Additional 3D objects — asteroids, comets, holographic panels |
+| `tweaks-panel.jsx` | Script | Dev-only live tweaks panel (palette, density, visibility toggles) |
+| `sanamsitoula_profile.jpg` | Image | Profile photo shown in hero section |
+| `Profile.pdf` | Asset | Downloadable CV / resume |
+| `Sanam Sitoula.pptx` | Asset | Portfolio presentation |
 | `Sanam Sitoula_project manager.pdf` | Asset | Project manager CV variant |
+
+### Config files
+
+| File | Description |
+|---|---|
+| `Dockerfile` | Builds nginx:stable-alpine image serving the static site |
+| `.dockerignore` | Excludes `.git`, `.wrangler`, PDFs, markdown from Docker image |
+| `wrangler.toml` | Cloudflare Pages project configuration |
+| `_headers` | HTTP response headers for Cloudflare Pages |
+| `.gitignore` | Files excluded from git |
 
 ### Documentation files
 
-| Path | Description |
+| File | Description |
 |---|---|
-| `README.md` | This file — project overview, structure, and quick start |
-| `DOCKER_AZURE_SETUP.md` | Full Docker + Azure setup guide with all errors and solutions |
-| `CICD_AZURE_SETUP.md` | GitHub Actions CI/CD pipeline guide for Azure |
+| `README.md` | This file — overview, structure, quick start, task tracker |
+| `DOCKER_AZURE_SETUP.md` | Docker + Azure full setup guide (12 sections, 7 errors documented) |
+| `CICD_AZURE_SETUP.md` | CI/CD pipeline guide (8 parts, full checklist) |
 | `CLOUDFLARE_SETUP.md` | Cloudflare Pages deployment guide |
 
 ### GitHub Actions workflows
 
-| Path | Trigger | What it does |
-|---|---|---|
-| `.github/workflows/azure-deploy.yml` | Push to `master` | Builds Docker image, pushes to ACR, deploys to Azure Container Apps |
-| `.github/workflows/deploy.yml` | Push to `master` | Deploys to Cloudflare Pages (original workflow) |
+| File | Trigger | What it does | Time |
+|---|---|---|---|
+| `.github/workflows/deploy.yml` | Push to `master` | Deploys to Cloudflare Pages | ~30 sec |
+| `.github/workflows/azure-deploy.yml` | Push to `master` | Builds Docker → pushes to ACR → updates Container App | ~3-4 min |
 
 ---
 
-## How We Are Building This Project
+## Project Build History
 
-This project has evolved across multiple tasks in the same repository:
+Every major task completed in this project, in order:
 
-| Task | Status | Guide |
+| # | Task | Status | Guide |
+|---|---|---|---|
+| 1 | Static portfolio site — HTML, CSS, Three.js 3D scene | ✅ Done | — |
+| 2 | Cloudflare Pages deployment + `wrangler.toml` | ✅ Done | [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) |
+| 3 | Docker support — `Dockerfile`, `.dockerignore`, local run | ✅ Done | [DOCKER_AZURE_SETUP.md §4–5](DOCKER_AZURE_SETUP.md) |
+| 4 | Azure Container Registry — created, image pushed manually | ✅ Done | [DOCKER_AZURE_SETUP.md §6](DOCKER_AZURE_SETUP.md) |
+| 5 | Azure Container Apps — environment + app created, live URL | ✅ Done | [DOCKER_AZURE_SETUP.md §7](DOCKER_AZURE_SETUP.md) |
+| 6 | Azure DNS Zone for `sanamsitoula.com.np` | ✅ Done | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| 7 | Nameservers updated at register.com.np to Azure DNS | ✅ Done | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| 8 | DNS records added (A, CNAME, TXT) in Azure DNS Zone | ✅ Done | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| 9 | Custom domain bind to Container App | 🔄 Waiting on DNS propagation | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| 10 | HTTPS managed certificate for custom domain | 🔄 After domain bind | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| 11 | GitHub Actions — Cloudflare CI/CD pipeline | ✅ Done + Working | [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) |
+| 12 | GitHub Actions — Azure CI/CD pipeline | ✅ Done (secrets added, workflow fixed) | [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) |
+| 13 | GitHub Actions permissions — Read/Write + Allow all actions | ✅ Done | [CICD_AZURE_SETUP.md §Part 1](CICD_AZURE_SETUP.md) |
+| 14 | All 5 GitHub Secrets added | ✅ Done | [CICD_AZURE_SETUP.md §Part 2](CICD_AZURE_SETUP.md) |
+| 15 | Portfolio redesign — white panels, hero photo, GitHub repos section, LinkedIn recommendations | ✅ Done | — |
+| 16 | Profile photo added to hero section with split layout | ✅ Done | — |
+
+---
+
+## Azure Infrastructure
+
+| Resource | Name | Region |
 |---|---|---|
-| Static portfolio site (HTML/CSS/JS) | ✅ Done | — |
-| Local Docker build and run | ✅ Done | [DOCKER_AZURE_SETUP.md §5](DOCKER_AZURE_SETUP.md) |
-| Push Docker image to Azure Container Registry | ✅ Done | [DOCKER_AZURE_SETUP.md §6](DOCKER_AZURE_SETUP.md) |
-| Deploy to Azure Container Apps | ✅ Done | [DOCKER_AZURE_SETUP.md §7](DOCKER_AZURE_SETUP.md) |
-| Custom domain (sanamsitoula.com.np) via Azure DNS | 🔄 In progress (DNS propagating) | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
-| GitHub Actions CI/CD pipeline → Azure | ✅ Done | [CICD_AZURE_SETUP.md](CICD_AZURE_SETUP.md) |
-| Cloudflare Pages deployment | ✅ Done | [CLOUDFLARE_SETUP.md](CLOUDFLARE_SETUP.md) |
-| HTTPS certificate for custom domain | 🔄 Pending DNS propagation | [DOCKER_AZURE_SETUP.md §12](DOCKER_AZURE_SETUP.md) |
+| Resource Group | `portofolio` | Korea Central |
+| Container Registry | `sanamsitoulaacr` | Korea Central |
+| Container Apps Environment | `sanam-portfolio-env` | Korea Central |
+| Container App | `sanam-portfolio-app` | Korea Central |
+| DNS Zone | `sanamsitoula.com.np` | Global |
+| Service Principal | `sanam-cicd` | — |
+
+> **Azure for Students restriction:** `eastus` region is blocked by subscription policy. All resources use `koreacentral`.
+
+---
+
+## GitHub CI/CD — Secrets Required
+
+These 5 secrets must exist in **GitHub → Settings → Secrets and variables → Actions**:
+
+| Secret Name | Where it is used |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare Pages deployment |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare Pages deployment |
+| `ACR_USERNAME` | Docker login to Azure Container Registry |
+| `ACR_PASSWORD` | Docker login to Azure Container Registry |
+| `AZURE_CREDENTIALS` | `az login` via service principal JSON |
+
+**Status: All 5 added ✅**
+
+See [CICD_AZURE_SETUP.md §Part 2](CICD_AZURE_SETUP.md) for how to get each value.
 
 ---
 
@@ -88,11 +145,20 @@ Open `http://127.0.0.1:8000`
 
 ```powershell
 docker build -t sanamsitoula-portfolio:latest .
-docker run --rm -p 8080:80 sanamsitoula-portfolio:latest
+docker run --rm -p 8081:80 sanamsitoula-portfolio:latest
 ```
-Open `http://127.0.0.1:8080`
+Open `http://127.0.0.1:8081`
 
-### Deploy to Azure (manual)
+### Deploy (automatic — just push)
+
+```powershell
+git add .
+git commit -m "describe your change"
+git push
+```
+GitHub Actions deploys to **both Cloudflare and Azure** automatically. Watch progress in the **Actions** tab.
+
+### Deploy to Azure (manual, if CI/CD is not working)
 
 ```powershell
 docker build -t sanamsitoula-portfolio:latest .
@@ -102,34 +168,12 @@ docker push sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest
 az containerapp update --name sanam-portfolio-app --resource-group portofolio --image sanamsitoulaacr.azurecr.io/sanamsitoula-portfolio:latest
 ```
 
-### Deploy to Azure (automatic via CI/CD)
-
-```powershell
-git add .
-git commit -m "your change description"
-git push
-```
-GitHub Actions handles the rest automatically. Watch progress in the **Actions** tab on GitHub.
-
----
-
-## Azure Infrastructure
-
-| Resource | Name | Region |
-|---|---|---|
-| Resource Group | `portofolio` | Korea Central |
-| Container Registry | `sanamsitoulaacr` | Korea Central |
-| Container Apps Environment | `sanam-portfolio-env` | Korea Central |
-| Container App | `sanam-portfolio-app` | Korea Central |
-| DNS Zone | `sanamsitoula.com.np` | (Global) |
-
-> **Subscription:** Azure for Students — uses `koreacentral` region due to policy restrictions on `eastus`.
-
 ---
 
 ## Notes
 
-- This is a static site — no backend, no database, no build step required
-- Docker image uses `nginx:stable-alpine` to serve the static files
+- Static site — no backend, no database, no npm build step
+- Docker image uses `nginx:stable-alpine` (~25 MB) to serve files
 - Azure Container Apps auto-scales to zero when idle (free tier)
-- The CI/CD pipeline runs on every push to `master` — avoid pushing broken code directly
+- Cloudflare Pages has a free tier with unlimited requests
+- `sanamsitoula_profile.jpg` must not be in `.dockerignore` — it is served as a static asset
