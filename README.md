@@ -170,6 +170,95 @@ az containerapp update --name sanam-portfolio-app --resource-group portofolio --
 
 ---
 
+## Contact Form — Email Setup (EmailJS + Gmail SMTP)
+
+The contact form on the portfolio sends email **without a backend server** using [EmailJS](https://emailjs.com).
+
+- **Sends from:** info.bhrikuty@gmail.com (Gmail SMTP)
+- **Receives at:** sanam.ctaula@gmail.com
+- **Free tier:** 200 emails/month — no database or server needed
+
+### Step 1: Create EmailJS account
+
+Go to [emailjs.com](https://emailjs.com) and sign up for a free account.
+
+### Step 2: Add Gmail as an Email Service
+
+1. In the EmailJS dashboard, go to **Email Services** → **Add New Service**
+2. Select **Gmail**
+3. Sign in with `info.bhrikuty@gmail.com`
+4. Give it a name (e.g. `portfolio-gmail`)
+5. Copy the **Service ID** shown (e.g. `service_abc123`)
+
+### Step 3: Create an Email Template
+
+1. Go to **Email Templates** → **Create New Template**
+2. Set the template as follows:
+
+| Field | Value |
+|---|---|
+| To Email | `sanam.ctaula@gmail.com` |
+| From Name | `{{from_name}}` |
+| Reply To | `{{from_email}}` |
+| Subject | `Portfolio Contact: {{from_name}}` |
+| Body | `Name: {{from_name}}`<br>`Mobile: {{from_mobile}}`<br>`Email: {{from_email}}`<br><br>`Message:`<br>`{{message}}` |
+
+3. Save the template and copy the **Template ID** (e.g. `template_xyz789`)
+
+### Step 4: Get your Public Key
+
+1. Go to **Account** → **General**
+2. Copy the **Public Key** (e.g. `user_AbCdEfGhIjK`)
+
+### Step 5: Update index.html
+
+Open [index.html](index.html) and find this block (near the bottom):
+
+```javascript
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+```
+
+Replace the placeholder values with your actual IDs:
+
+```javascript
+const EMAILJS_PUBLIC_KEY  = 'user_AbCdEfGhIjK';   // your public key
+const EMAILJS_SERVICE_ID  = 'service_abc123';       // your service ID
+const EMAILJS_TEMPLATE_ID = 'template_xyz789';      // your template ID
+```
+
+### Step 6: Commit and push
+
+```powershell
+git add index.html
+git commit -m "feat: connect EmailJS for contact form"
+git push
+```
+
+The form will now send emails from `info.bhrikuty@gmail.com` to `sanam.ctaula@gmail.com` whenever a visitor submits it.
+
+### How it works (no backend)
+
+```
+Visitor fills form → EmailJS JS SDK → Gmail SMTP (info.bhrikuty@gmail.com) → sanam.ctaula@gmail.com
+```
+
+No server, no database, no PHP. EmailJS calls Gmail's SMTP API directly from the browser using your service credentials stored securely on their platform.
+
+---
+
+## Contact Details
+
+| Channel | Value |
+|---|---|
+| WhatsApp | +977 9860793050 |
+| Email | sanam.ctaula@gmail.com |
+| LinkedIn | linkedin.com/in/sanam-sitoula-35438a122 |
+| GitHub | github.com/sanamsitoula |
+
+---
+
 ## Notes
 
 - Static site — no backend, no database, no npm build step
@@ -177,3 +266,4 @@ az containerapp update --name sanam-portfolio-app --resource-group portofolio --
 - Azure Container Apps auto-scales to zero when idle (free tier)
 - Cloudflare Pages has a free tier with unlimited requests
 - `sanamsitoula_profile.jpg` must not be in `.dockerignore` — it is served as a static asset
+- Contact form requires EmailJS setup (see section above) — replace the 3 placeholder values in `index.html`

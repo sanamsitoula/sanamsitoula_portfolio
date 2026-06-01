@@ -789,6 +789,23 @@ h2.section-title em {
   .brand-name { font-size: 17px; }
   .topbar-nav { display: none; }
 
+  /* Panels more transparent on mobile so 3D scene shows through */
+  .section-light .panel,
+  .section-light .panel--wide {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 24px 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* Contact cards single column on mobile */
+  .contact-cards { grid-template-columns: 1fr; gap: 10px; }
+  .form-row { grid-template-columns: 1fr; }
+  .panel--contact { text-align: left; }
+  .panel--contact .eyebrow { justify-content: flex-start; }
+  .panel--contact .contact-title { font-size: clamp(24px, 6vw, 36px); }
+
   /* Nav dots → bottom horizontal strip */
   .nav-dots {
     top: auto;
@@ -855,10 +872,12 @@ h2.section-title em {
 /* ── Light panel — all sections ─────────────────────────────────────── */
 .section-light .panel,
 .section-light .panel--wide {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.82);
   border-radius: 20px;
   padding: 36px 40px;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.32);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Typography overrides */
@@ -1135,6 +1154,134 @@ h2.section-title em {
   background: #0ea5e9 !important;
   color: #fff !important;
   border-color: #0ea5e9 !important;
+}
+
+/* ── Contact section layout ────────────────────────────────────────── */
+.panel--contact { max-width: 680px; text-align: center; }
+
+/* Contact info cards */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+  text-align: left;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  color: inherit;
+}
+.contact-card:hover {
+  border-color: #0ea5e9;
+  background: #f0f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14,165,233,0.12);
+}
+.contact-card-icon {
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+  color: #0ea5e9;
+}
+.contact-card:nth-child(1) .contact-card-icon { color: #25d366; }
+.contact-card:nth-child(3) .contact-card-icon { color: #0077b5; }
+.contact-card:nth-child(4) .contact-card-icon { color: #333; }
+.contact-card-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.contact-card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9ca3af;
+}
+.contact-card-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Contact form */
+.contact-form {
+  text-align: left;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.req { color: #ef4444; }
+.form-group input,
+.form-group textarea {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #111827;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #9ca3af; }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+}
+.form-submit-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.form-status {
+  font-size: 13px;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: none;
+}
+.form-status--ok {
+  display: block;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+.form-status--err {
+  display: block;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
 }
 
 /* Small phones */
