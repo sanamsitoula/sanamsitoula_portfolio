@@ -35,7 +35,7 @@ This repository is configured for Cloudflare Pages deployment.
 
 To deploy from the project root, use:
 ```powershell
-npx wrangler pages deploy .
+npx wrangler pages deploy . --project-name=sanamsitoula-portfolio --branch=master
 ```
 
 ## Notes
