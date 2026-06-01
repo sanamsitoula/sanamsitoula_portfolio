@@ -1,0 +1,12 @@
+name = "sanamsitoula-portfolio"
+type = "javascript"
+compatibility_date = "2024-01-01"
+
+# No build step needed — static site
+[build]
+command = ""
+cwd = "."
+
+# Root directory for static assets
+[site]
+bucket = "."
